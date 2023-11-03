@@ -35,7 +35,7 @@ Helicone provides advanced functionality like caching, etc. Helicone currently s
 
 If you want to use Helicone to proxy your OpenAI/Azure requests, then you can - 
 
-- Set helicone as your base url via: `litellm.api_url` 
+- Set helicone as your base url via: `litellm.api_base` 
 - Pass in helicone request headers via: `litellm.headers` 
 
 Complete Code

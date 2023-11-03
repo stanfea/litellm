@@ -2,14 +2,14 @@
 #    On success, logs events to Helicone
 import dotenv, os
 import requests
-
+from openai import VERSION as OPENAI_VERSION
 dotenv.load_dotenv()  # Loading env variables using dotenv
 import traceback
 
 
 class HeliconeLogger:
     # Class variables or attributes
-    helicone_model_list = ["gpt", "claude"]
+    helicone_model_list = ["gpt", "claude", "palm"]
 
     def __init__(self):
         # Instance variables
@@ -61,10 +61,12 @@ class HeliconeLogger:
                 provider_request, response_obj = self.claude_mapping(
                     model=model, messages=messages, response_obj=response_obj
                 )
+            if "palm" in model:
+                response_obj['model'] = f"gpt-4/{model}"
 
             providerResponse = {
                 "json": response_obj,
-                "headers": {"openai-version": "2020-10-01"},
+                "headers": {"openai-version": OPENAI_VERSION},
                 "status": 200,
             }
 
